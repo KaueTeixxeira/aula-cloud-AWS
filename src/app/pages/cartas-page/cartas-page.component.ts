@@ -14,7 +14,7 @@ export class CartasPageComponent implements OnInit {
   constructor(private meuServico: CartaService, private route: Router) { }
   listaDeCartas: Array<Carta> = [];
   ngOnInit(): void {
-    this.getCards(0)
+    this.getCards()
 
     // BUSCAR UMA CARTA 
     //this.meuServico.getOneCard(1).subscribe((data: Carta) => {
@@ -42,13 +42,19 @@ export class CartasPageComponent implements OnInit {
   }
   currentPage: number = 0;
   last: boolean = false
-  getCards(page: number){
-    this.meuServico.getSomeCards(page,6).subscribe((data: any) => {
-      console.log(data)
-      this.currentPage = data.pageable.pageNumber
-      this.listaDeCartas.push(...data.content);
-      this.last = data.last
-    });
+  // getCards(page: number){
+  //   this.meuServico.getSomeCards(page,6).subscribe((data: any) => {
+  //     console.log(data)
+  //     this.currentPage = data.pageable.pageNumber
+  //     this.listaDeCartas.push(...data.content);
+  //     this.last = data.last
+  //   });
+  // }
+
+  getCards(){
+    this.meuServico.getAllCards().subscribe((data : Carta[]) => {
+      this.listaDeCartas = data
+    })
   }
 
   exit(){

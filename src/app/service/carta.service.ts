@@ -26,8 +26,17 @@ export class CartaService {
         return this.httpClient.get(this.apiUrl + "/" + id)
     }
 
-    createCard(carta: Carta): Observable<any>{ // Criar carta
-        return this.httpClient.post<any>(this.apiUrl, carta).pipe(take(1))
+    createCard(carta: Carta, file : File): Observable<any>{ // Criar carta
+        console.log(carta.nome)
+        var formData: FormData = new FormData
+        formData.append('freestyle', carta.freestyle.toString());
+        formData.append('originalidade', carta.originalidade.toString());
+        formData.append('impacto', carta.impacto.toString());
+        formData.append('maisOuvidas', carta.maisOuvidas.toString());
+        formData.append('nome', carta.nome);
+        formData.append('ranking', carta.ranking);
+        formData.append('file', file)
+        return this.httpClient.post<any>(this.apiUrl, formData).pipe(take(1))
     }
 
     deleteCard(id: Number): Observable<any>{ // Deletar carta

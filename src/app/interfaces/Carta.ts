@@ -7,5 +7,6 @@ export interface Carta {
     nome: string;
     ranking: string;
     url: string;  
+    uuid?: string;
   }
   

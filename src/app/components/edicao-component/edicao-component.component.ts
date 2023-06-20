@@ -37,7 +37,14 @@ export class EdicaoComponentComponent implements OnInit {
     if (this.carta.nome != "" || this.jogador.nome != "") {
       console.log(this.carta.id)
       console.log(this.verificacao)
-      this.url = this.carta.url
+      // this.url = this.carta.uuid ? this.carta.uuid : "https://www.cbvl.esp.br/upload/post/default.jpg";
+      const teste = this.carta.uuid
+      console.log(teste)
+      if (teste) {
+        this.selectedImage = teste
+      } else {
+        this.url = "https://www.cbvl.esp.br/upload/post/default.jpg";
+      }
       this.nomeCarta = this.carta.nome
       this.freestyle = this.carta.freestyle
       this.originalidade = this.carta.originalidade
@@ -62,17 +69,16 @@ export class EdicaoComponentComponent implements OnInit {
   adicionarCarta() {
     let card : Carta = {
       id: 0,
-      url : this.url,
+      url : "this.url",
       freestyle: this.freestyle,
       originalidade: this.originalidade,
       impacto: this.impacto,
       maisOuvidas: this.maisOuvidas,
       nome: this.nomeCarta,
       ranking: this.ranking}
-      console.log(this.carta + "AAA")
 
     if (this.carta.id === 0) {
-      this.cartaService.createCard(card).subscribe((data: Carta) => {
+      this.cartaService.createCard(card, this.file).subscribe((data: Carta) => {
         console.log(data)
       })
       this.frase = "Carta cadastrada com sucesso!"
@@ -143,6 +149,31 @@ export class EdicaoComponentComponent implements OnInit {
   modalzera(){
     this.alertBoolean = !this.alertBoolean
     this.refreshEmitter.emit()
+  }
+
+ // AWS SHT
+  
+  file!: File
+  colocaArquivo(event: any) {
+    this.file = event.target.files[0];
+    this.displaySelectedImage(this.file);
+  }
+  
+  // AWS Sht
+
+  selectedImage: string = "https://www.cbvl.esp.br/upload/post/default.jpg";
+
+  // handleFileInputChange(event: any): void {
+  //   const file = event.target.files[0];
+  //   this.displaySelectedImage(file);
+  // }
+
+  displaySelectedImage(file: File): void {
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.selectedImage = event.target.result;
+    };
+    reader.readAsDataURL(file);
   }
 
 }

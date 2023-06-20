@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ExitButtonComponent } from './components/exit-button/exit-button.component';
 import { GamePageComponent } from './pages/game-page/game-page.component';
 import { ArenaPageComponent } from './pages/arena-page/arena-page.component';
+import { SelectedCardComponent } from './pages/selected-card/selected-card.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ArenaPageComponent } from './pages/arena-page/arena-page.component';
     EdicaoComponentComponent,
     ExitButtonComponent,
     GamePageComponent,
-    ArenaPageComponent
+    ArenaPageComponent,
+    SelectedCardComponent
   ],
   imports: [
     FormsModule,

@@ -8,6 +8,7 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { PerfilPageComponent } from './pages/perfil-page/perfil-page.component';
 import { GamePageComponent } from './pages/game-page/game-page.component';
 import { ArenaPageComponent } from './pages/arena-page/arena-page.component';
+import { SelectedCardComponent } from './pages/selected-card/selected-card.component';
 
 const routes: Routes = [
   {path: '',component: LoginPageComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path: 'perfil-page', component: PerfilPageComponent},
   {path: 'edicao-page', component: EdicaoPageComponent},
   {path: 'game-page', component: GamePageComponent},
-  {path: 'arena-page', component: ArenaPageComponent}
+  {path: 'arena-page', component: ArenaPageComponent},
+  {path: 'selected-card/:id', component: SelectedCardComponent}
 ];
 
 @NgModule({
